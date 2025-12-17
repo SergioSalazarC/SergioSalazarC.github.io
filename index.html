@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Sports Club</title>
+    <title>Club Balonmano Pinto</title>
     <style>
         /* --- RESET & BASICS --- */
         * {
@@ -14,8 +14,9 @@
         }
 
         :root {
-            --primary-red: #D6001C; /* Bold Red */
-            --dark-black: #111111;  /* Deep Black */
+            --primary-red: #E31B23; /* Match logo red */
+            --accent-yellow: #FFE135; /* Match logo yellow */
+            --dark-black: #111111;
             --pure-white: #FFFFFF;
             --light-gray: #F4F4F4;
         }
@@ -36,30 +37,43 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
+            padding: 0.8rem 5%;
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 4px solid var(--primary-red);
         }
 
-        .logo {
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px; /* Adjust size as needed */
+            margin-right: 15px;
+        }
+
+        .logo-text {
             font-size: 1.5rem;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
-        .logo span { color: var(--primary-red); }
+        .logo-text .club-name { color: var(--pure-white); }
+        .logo-text .pinto { color: var(--primary-red); }
 
-        .nav-links { display: flex; gap: 20px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
         
         .nav-links a {
             font-weight: 500;
             transition: color 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
         }
 
-        .nav-links a:hover { color: var(--primary-red); }
+        .nav-links a:hover { color: var(--accent-yellow); }
 
         .btn-join {
             background-color: var(--primary-red);
@@ -70,14 +84,15 @@
             transition: background 0.3s;
         }
 
-        .btn-join:hover { background-color: #b30017; }
+        .btn-join:hover { background-color: #b30017; color: var(--accent-yellow); }
 
         /* --- HERO SECTION --- */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            /* Handball specific hero image */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1591123481941-791326303636?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
-            height: 90vh;
+            height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -89,15 +104,16 @@
 
         .hero h1 {
             font-size: 3.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-yellow);
+            text-transform: uppercase;
         }
 
         .cta-button {
@@ -113,18 +129,13 @@
         }
 
         .cta-button:hover {
-            background-color: transparent;
-            color: var(--pure-white);
-            border: 2px solid var(--pure-white);
+            background-color: var(--accent-yellow);
+            color: var(--dark-black);
+            border: 2px solid var(--accent-yellow);
         }
 
-        /* --- ABOUT SECTION --- */
+        /* --- SECTIONS GENERAL --- */
         .section-padding { padding: 4rem 5%; }
-
-        .about {
-            background-color: var(--pure-white);
-            text-align: center;
-        }
 
         .section-title {
             font-size: 2.5rem;
@@ -138,14 +149,20 @@
         .section-title::after {
             content: '';
             display: block;
-            width: 50%;
+            width: 60%;
             height: 4px;
             background-color: var(--primary-red);
             margin: 10px auto 0;
         }
 
-        /* --- PROGRAMS GRID --- */
-        .programs {
+        /* --- ABOUT SECTION --- */
+        .about {
+            background-color: var(--pure-white);
+            text-align: center;
+        }
+
+        /* --- TEAMS GRID --- */
+        .teams {
             background-color: var(--light-gray);
         }
 
@@ -163,118 +180,142 @@
             transition: transform 0.3s;
         }
 
-        .card:hover { transform: translateY(-5px); }
+        .card:hover { transform: translateY(-5px); border-bottom-color: var(--accent-yellow); }
 
         .card-image {
-            height: 200px;
+            height: 220px;
             background-color: #333;
             background-size: cover;
-            background-position: center;
+            background-position: center top;
         }
 
-        .card-content { padding: 1.5rem; }
-        .card-content h3 { margin-bottom: 0.5rem; color: var(--primary-red); }
+        .card-content { padding: 1.5rem; text-align: left; }
+        .card-content h3 { margin-bottom: 0.5rem; color: var(--primary-red); font-size: 1.4rem; }
+        .category-tag {
+            display: inline-block;
+            background-color: var(--accent-yellow);
+            color: var(--dark-black);
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
 
         /* --- CONTACT / FOOTER --- */
         .contact {
             background-color: var(--dark-black);
             color: var(--pure-white);
             text-align: center;
+            border-top: 5px solid var(--accent-yellow);
         }
 
         .contact p { margin-bottom: 1.5rem; color: #ccc; }
+        .contact h3 { color: var(--accent-yellow); margin-top: 1.5rem; }
 
         footer {
-            background-color: #000;
+            background-color: #080808;
             color: #888;
             text-align: center;
-            padding: 1rem;
+            padding: 1.5rem;
             font-size: 0.9rem;
         }
+        footer span { color: var(--primary-red); font-weight: bold; }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* Simplified for template */
+            .hero h2 { font-size: 1.4rem; }
+            .nav-links { display: none; }
+            .logo-text { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Apex <span>Sports</span></div>
+        <div class="logo-container">
+            <img src="image_0.png" alt="Balonmano Pinto Logo" class="logo-img">
+            <div class="logo-text">
+                <span class="club-name">Club Balonmano</span> <span class="pinto">Pinto</span>
+            </div>
+        </div>
         <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#programs">Programs</a>
-            <a href="#contact" class="btn-join">Join Now</a>
+            <a href="#home">Inicio</a>
+            <a href="#about">El Club</a>
+            <a href="#teams">Equipos</a>
+            <a href="#contact" class="btn-join">Únete</a>
         </div>
     </nav>
 
     <section id="home" class="hero">
-        <h1>Unleash Your Potential</h1>
-        <p>Join the premier sports club dedicated to excellence, discipline, and community. Training champions since 2010.</p>
-        <a href="#contact" class="cta-button">Start Training Today</a>
+        <h1>Club Balonmano Pinto</h1>
+        <h2>Pasión, Esfuerzo y Equipo</h2>
+        <p style="font-size: 1.2rem; max-width: 700px; margin-bottom: 2rem;">El corazón del balonmano en Pinto. Formando jugadores y compitiendo con orgullo desde la base hasta la élite.</p>
+        <a href="#contact" class="cta-button">Ven a Entrenar</a>
     </section>
 
     <section id="about" class="section-padding about">
-        <h2 class="section-title">Who We Are</h2>
-        <p style="max-width: 800px; margin: 2rem auto;">
-            We are a community-driven club focused on physical and mental development. 
-            Whether you are looking to compete at a high level or just stay fit, 
-            Apex Sports offers world-class facilities and expert coaching in a supportive environment.
+        <h2 class="section-title">Nuestro Club</h2>
+        <p style="max-width: 800px; margin: 2rem auto; font-size: 1.1rem;">
+            El Club Balonmano Pinto es más que un equipo; es una familia dedicada a la promoción del balonmano. 
+            Creemos en los valores del deporte: el respeto, la disciplina y el trabajo en equipo, 
+            ofreciendo un entorno donde cada jugador puede alcanzar su máximo potencial.
         </p>
     </section>
 
-    <section id="programs" class="section-padding programs">
+    <section id="teams" class="section-padding teams">
         <div style="text-align: center;">
-            <h2 class="section-title">Our Programs</h2>
+            <h2 class="section-title">Nuestras Categorías</h2>
         </div>
         
         <div class="grid-container">
             <div class="card">
-                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1628804639733-d0412b08665e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
                 <div class="card-content">
-                    <h3>Strength & Conditioning</h3>
-                    <p>Build the foundation of an athlete. Focus on power, endurance, and injury prevention.</p>
+                    <span class="category-tag">Competición</span>
+                    <h3>Equipo Sénior</h3>
+                    <p>Nuestro primer equipo compite al máximo nivel regional y nacional. Representando a Pinto con garra y técnica.</p>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1517466787929-bc90951d64b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1551280857-2b9bbe52cf02?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
                 <div class="card-content">
-                    <h3>Competitive Team</h3>
-                    <p>For advanced athletes looking to compete in regional and national leagues.</p>
+                    <span class="category-tag">Formación</span>
+                    <h3>Cantera y Base</h3>
+                    <p>Desde alevines hasta juveniles. Desarrollamos el talento joven con entrenadores cualificados.</p>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');background-position: center;"></div>
                 <div class="card-content">
-                    <h3>Youth Academy</h3>
-                    <p>Developing the next generation. Ages 6-14. Fun, discipline, and fundamentals.</p>
+                    <span class="category-tag">Iniciación</span>
+                    <h3>Escuela de Balonmano</h3>
+                    <p>Para los más pequeños (4-8 años). Aprendizaje a través del juego, la diversión y la coordinación.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="section-padding contact">
-        <h2 class="section-title" style="color:white">Join The Club</h2>
-        <p>Ready to get started? Visit us or drop us an email.</p>
+        <h2 class="section-title" style="color:white">Contacto</h2>
+        <p>¿Quieres formar parte del CB Pinto? ¡Escríbenos o ven a vernos!</p>
         
         <div style="margin-top: 2rem;">
-            <h3>📍 Location</h3>
-            <p>123 Victory Lane, Sportsville, SP 54321</p>
+            <h3>📍 Pabellón</h3>
+            <p>Pabellón Municipal Príncipes de Asturias, Pinto</p>
             
-            <h3>📧 Email</h3>
-            <p>info@apexsportsclub.test</p>
+            <h3>📧 Correo Electrónico</h3>
+            <p>info@cbpinto.test</p>
             
-            <a href="mailto:info@apexsportsclub.test" class="cta-button" style="display:inline-block; margin-top:20px;">Contact Us</a>
+            <a href="mailto:info@cbpinto.test" class="cta-button" style="display:inline-block; margin-top:20px;">Enviar Email</a>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Apex Sports Club. All Rights Reserved.</p>
+        <p>&copy; 2024 Club Balonmano Pinto. Todos los derechos reservados. <br> Pasión por el <span>Balonmano</span>.</p>
     </footer>
 
 </body>
