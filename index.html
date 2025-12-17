@@ -1,7 +1,281 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Sports Club</title>
+    <style>
+        /* --- RESET & BASICS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-red: #D6001C; /* Bold Red */
+            --dark-black: #111111;  /* Deep Black */
+            --pure-white: #FFFFFF;
+            --light-gray: #F4F4F4;
+        }
+
+        body {
+            background-color: var(--pure-white);
+            color: var(--dark-black);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background-color: var(--dark-black);
+            color: var(--pure-white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 4px solid var(--primary-red);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span { color: var(--primary-red); }
+
+        .nav-links { display: flex; gap: 20px; }
+        
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary-red); }
+
+        .btn-join {
+            background-color: var(--primary-red);
+            color: var(--pure-white);
+            padding: 0.5rem 1.2rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-join:hover { background-color: #b30017; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--pure-white);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid var(--primary-red);
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--pure-white);
+            border: 2px solid var(--pure-white);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .section-padding { padding: 4rem 5%; }
+
+        .about {
+            background-color: var(--pure-white);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-black);
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 4px;
+            background-color: var(--primary-red);
+            margin: 10px auto 0;
+        }
+
+        /* --- PROGRAMS GRID --- */
+        .programs {
+            background-color: var(--light-gray);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-bottom: 4px solid var(--primary-red);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        .card-image {
+            height: 200px;
+            background-color: #333;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-content { padding: 1.5rem; }
+        .card-content h3 { margin-bottom: 0.5rem; color: var(--primary-red); }
+
+        /* --- CONTACT / FOOTER --- */
+        .contact {
+            background-color: var(--dark-black);
+            color: var(--pure-white);
+            text-align: center;
+        }
+
+        .contact p { margin-bottom: 1.5rem; color: #ccc; }
+
+        footer {
+            background-color: #000;
+            color: #888;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for template */
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+    <nav>
+        <div class="logo">Apex <span>Sports</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#programs">Programs</a>
+            <a href="#contact" class="btn-join">Join Now</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1>Unleash Your Potential</h1>
+        <p>Join the premier sports club dedicated to excellence, discipline, and community. Training champions since 2010.</p>
+        <a href="#contact" class="cta-button">Start Training Today</a>
+    </section>
+
+    <section id="about" class="section-padding about">
+        <h2 class="section-title">Who We Are</h2>
+        <p style="max-width: 800px; margin: 2rem auto;">
+            We are a community-driven club focused on physical and mental development. 
+            Whether you are looking to compete at a high level or just stay fit, 
+            Apex Sports offers world-class facilities and expert coaching in a supportive environment.
+        </p>
+    </section>
+
+    <section id="programs" class="section-padding programs">
+        <div style="text-align: center;">
+            <h2 class="section-title">Our Programs</h2>
+        </div>
+        
+        <div class="grid-container">
+            <div class="card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="card-content">
+                    <h3>Strength & Conditioning</h3>
+                    <p>Build the foundation of an athlete. Focus on power, endurance, and injury prevention.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1517466787929-bc90951d64b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="card-content">
+                    <h3>Competitive Team</h3>
+                    <p>For advanced athletes looking to compete in regional and national leagues.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="card-content">
+                    <h3>Youth Academy</h3>
+                    <p>Developing the next generation. Ages 6-14. Fun, discipline, and fundamentals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding contact">
+        <h2 class="section-title" style="color:white">Join The Club</h2>
+        <p>Ready to get started? Visit us or drop us an email.</p>
+        
+        <div style="margin-top: 2rem;">
+            <h3>📍 Location</h3>
+            <p>123 Victory Lane, Sportsville, SP 54321</p>
+            
+            <h3>📧 Email</h3>
+            <p>info@apexsportsclub.test</p>
+            
+            <a href="mailto:info@apexsportsclub.test" class="cta-button" style="display:inline-block; margin-top:20px;">Contact Us</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Apex Sports Club. All Rights Reserved.</p>
+    </footer>
+
 </body>
 </html>
