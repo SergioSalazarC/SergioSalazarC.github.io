@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Equipos - Club Balonmano Pinto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo-container">
+        <img src="image_0.png" alt="Balonmano Pinto Logo" class="logo-img">
+        <div class="logo-text">
+            <span class="club-name">Club Balonmano</span> <span class="pinto">Pinto</span>
+        </div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="index.html#about">El Club</a>
+        <a href="equipos.html">Equipos</a>
+        <a href="index.html#contact" class="btn-join">Únete</a>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="teams-hero">
+    <div class="teams-hero-content">
+        <h1>Nuestros Equipos</h1>
+        <p>Conoce a fondo cada categoría del CB Pinto</p>
+    </div>
+</section>
+
+<!-- INTRODUCCIÓN -->
+<section class="section-padding teams-intro">
+    <div class="intro-content">
+        <h2 class="section-title">Formando Campeones</h2>
+        <p>En el Club Balonmano Pinto contamos con equipos en diferentes categorías, cada uno con su propio estilo de juego y objetivos.
+            Desde los más pequeños hasta nuestras promesas cadetes, todos comparten la misma pasión por el balonmano.</p>
+    </div>
+</section>
+
+<!-- EQUIPOS INTERACTIVOS -->
+<section class="section-padding teams-showcase">
+
+
+    <!-- JUVENIL FEMENINO -->
+    <div class="team-interactive-card cadete-card">
+        <div class="team-image-section">
+            <img src="Images/juvenilFemenino.jpeg" alt="Equipo Juvenil Femenino" class="team-photo">
+            <div class="team-overlay">
+                <span class="category-badge">Juvenil</span>
+            </div>
+        </div>
+        <div class="team-info-section">
+            <div class="team-title-bar">
+                <h2>Juvenil Femenino</h2>
+                <span class="age-pill">16 - 18 años</span>
+            </div>
+            <p class="team-motto">"Rumbo a la élite"</p>
+
+            <div class="expandable-content" id="cadete-content">
+                <div class="info-columns">
+                    <div class="info-col">
+                        <h4>📅 Entrenamientos</h4>
+                        <p>Lunes: 18:00 - 19:00</p>
+                        <p>Martes: 19:15 - 20:45</p>
+                        <p>Jueves: 19:15 - 20:45</p>
+                    </div>
+                    <div class="info-col">
+                        <h4>🏆 Competición</h4>
+                        <p>2ª Juvenil Femenina</p>
+                        <p>Federación Madrileña de Balonmano</p>
+                    </div>
+                </div>
+
+                <div class="info-columns">
+                    <div class="info-col">
+                        <h4>👩‍🏫 Staff Técnico</h4>
+                        <p><strong>Entrenador:</strong> Sergio Salazar</p>
+                    </div>
+                    <div class="info-col">
+                        <h4>📍 Instalaciones</h4>
+                        <p>Pabellón Municipal Sandra Aguilar</p>
+                        <p>Pabellón Municipal Alberto Contador</p>
+                    </div>
+                </div>
+
+                <div class="team-description-box">
+                    <h4>Sobre el equipo</h4>
+                    <p>Descripción del equipo BLA BLA BLA.</p>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <span class="stat-number">XX</span>
+                        <span class="stat-label">Jugadoras</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">X</span>
+                        <span class="stat-label">Años en el club</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">XX</span>
+                        <span class="stat-label">Posición</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleTeam('juvenil')">Ver más información</button>
+        </div>
+    </div>
+</section>
+
+<!-- LLAMADA A LA ACCIÓN -->
+<section class="cta-join-section">
+    <div class="cta-content">
+        <h2>¿Listo para unirte?</h2>
+        <p>Encuentra tu lugar en alguno de nuestros equipos. Ven a una sesión de prueba gratuita.</p>
+        <a href="index.html#contact" class="cta-button">Contáctanos Ahora</a>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Club Balonmano Pinto. Todos los derechos reservados. <br> Pasión por el <span>Balonmano</span>.</p>
+</footer>
+
+<script>
+    function toggleTeam(teamId) {
+        const content = document.getElementById(teamId + '-content');
+        const btn = event.target;
+
+        if (content.classList.contains('expanded')) {
+            content.classList.remove('expanded');
+            btn.textContent = 'Ver más información';
+        } else {
+            content.classList.add('expanded');
+            btn.textContent = 'Ver menos';
+        }
+    }
+</script>
+
+</body>
+</html>
