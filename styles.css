@@ -567,42 +567,357 @@ footer span {
     color: var(--dark-black);
 }
 
-/* --- CTA JOIN SECTION --- */
-.cta-join-section {
-    background: linear-gradient(135deg, var(--dark-black) 0%, #2a2a2a 100%);
-    color: white;
+/* --- RESULTS PAGE HERO --- */
+.results-hero {
+    background: linear-gradient(135deg, #eb2525 0%, #651212 100%);
     padding: 5rem 5%;
     text-align: center;
-    border-top: 6px solid var(--accent-yellow);
+    color: var(--pure-white);
+    border-bottom: 6px solid var(--accent-yellow);
 }
 
-.cta-content h2 {
+.results-hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.results-hero-content p {
+    font-size: 1.4rem;
+    opacity: 0.95;
+}
+
+/* --- WEEKEND SELECTOR --- */
+.weekend-selector {
+    background-color: var(--pure-white);
+    text-align: center;
+    padding: 2rem 5%;
+}
+
+.weekend-info h2 {
+    font-size: 2rem;
+    color: var(--dark-black);
+    margin-bottom: 0.5rem;
+}
+
+.weekend-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* --- RESULTS SECTION --- */
+.results-section {
+    background-color: var(--light-gray);
+}
+
+.category-results {
+    margin-bottom: 4rem;
+}
+
+.category-header {
+    padding: 1.5rem 2rem;
+    border-radius: 8px 8px 0 0;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0;
+}
+
+.category-header h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.category-label {
+    background-color: rgba(255,255,255,0.2);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.alevin-header {
+    background: linear-gradient(135deg, #E31B23 0%, #ff4444 100%);
+}
+
+.infantil-header {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+}
+
+.cadete-header {
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+}
+
+/* --- MATCHES CONTAINER --- */
+.matches-container {
+    background: white;
+    border-radius: 0 0 8px 8px;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* --- MATCH CARD --- */
+.match-card {
+    padding: 2rem;
+    border-bottom: 2px solid var(--light-gray);
+    transition: background-color 0.3s;
+}
+
+.match-card:last-child {
+    border-bottom: none;
+}
+
+.match-card:hover {
+    background-color: #fafafa;
+}
+
+.match-card.victory {
+    border-left: 6px solid #10b981;
+}
+
+.match-card.defeat {
+    border-left: 6px solid #ef4444;
+}
+
+.match-card.draw {
+    border-left: 6px solid #f59e0b;
+}
+
+/* --- MATCH INFO TOP --- */
+.match-info-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.match-date {
+    font-weight: bold;
+    color: var(--dark-black);
+    font-size: 0.95rem;
+}
+
+.match-venue {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.match-status {
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.match-status.win {
+    background-color: #10b981;
+    color: white;
+}
+
+.match-status.loss {
+    background-color: #ef4444;
+    color: white;
+}
+
+.match-status.tie {
+    background-color: #f59e0b;
+    color: white;
+}
+
+/* --- MATCH SCOREBOARD --- */
+.match-scoreboard {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.team {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.home-team {
+    justify-content: flex-end;
+}
+
+.away-team {
+    justify-content: flex-start;
+}
+
+.team-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 2px solid var(--light-gray);
+}
+
+.team-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--dark-black);
+}
+
+/* --- SCORE DISPLAY --- */
+.score-display {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, var(--light-gray) 0%, #e5e5e5 100%);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.score {
     font-size: 3rem;
+    font-weight: bold;
+    color: var(--dark-black);
+    line-height: 1;
+    min-width: 60px;
+    text-align: center;
+}
+
+.victory .home-score,
+.defeat .away-score {
+    color: #10b981;
+}
+
+.victory .away-score,
+.defeat .home-score {
+    color: #999;
+}
+
+.draw .score {
+    color: #f59e0b;
+}
+
+.score-divider {
+    font-size: 2rem;
+    color: #999;
+    font-weight: bold;
+}
+
+/* --- MATCH HIGHLIGHTS --- */
+.match-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.highlight {
+    background-color: var(--accent-yellow);
+    color: var(--dark-black);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* --- SUMMARY SECTION --- */
+.summary-section {
+    background: linear-gradient(135deg, var(--dark-black) 0%, #2a2a2a 100%);
+    color: white;
+    padding: 4rem 5%;
+    text-align: center;
+}
+
+.summary-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.summary-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.summary-card {
+    background-color: rgba(255,255,255,0.1);
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    min-width: 150px;
+    border: 3px solid;
+}
+
+.win-card {
+    border-color: #10b981;
+}
+
+.draw-card {
+    border-color: #f59e0b;
+}
+
+.loss-card {
+    border-color: #ef4444;
+}
+
+.summary-number {
+    display: block;
+    font-size: 3.5rem;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.summary-label {
+    display: block;
+    font-size: 1rem;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.summary-text {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* --- NEXT MATCHES SECTION --- */
+.next-matches-section {
+    background: linear-gradient(135deg, var(--primary-red) 0%, #b30017 100%);
+    color: white;
+    text-align: center;
+    padding: 4rem 5%;
+}
+
+.next-matches-content h2 {
+    font-size: 2.5rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
 }
 
-.cta-content p {
+.next-matches-content p {
     font-size: 1.3rem;
-    margin-bottom: 2.5rem;
-    opacity: 0.9;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 2rem;
+    opacity: 0.95;
 }
 
-.cta-join-section .cta-button {
+.next-matches-section .cta-button {
     background-color: var(--accent-yellow);
     color: var(--dark-black);
     border-color: var(--accent-yellow);
-    font-size: 1.1rem;
-    padding: 1.1rem 2.5rem;
 }
 
-.cta-join-section .cta-button:hover {
-    background-color: var(--primary-red);
-    color: white;
-    border-color: var(--primary-red);
+.next-matches-section .cta-button:hover {
+    background-color: white;
+    border-color: white;
 }
 
 /* --- RESPONSIVE --- */
@@ -659,5 +974,63 @@ footer span {
 
     .cta-content p {
         font-size: 1.1rem;
+    }
+
+    .results-hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .results-hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .category-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .category-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .match-scoreboard {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .team {
+        justify-content: center !important;
+    }
+
+    .score-display {
+        order: -1;
+        justify-content: center;
+    }
+
+    .team-name {
+        font-size: 1.1rem;
+    }
+
+    .team-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .score {
+        font-size: 2.5rem;
+        min-width: 50px;
+    }
+
+    .summary-stats {
+        gap: 1.5rem;
+    }
+
+    .summary-card {
+        padding: 1.5rem 2rem;
+        min-width: 120px;
+    }
+
+    .summary-number {
+        font-size: 2.5rem;
     }
 }
