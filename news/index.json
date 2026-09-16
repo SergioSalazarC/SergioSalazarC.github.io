@@ -1,0 +1,38 @@
+[
+  {
+    "id": "senior-victoria",
+    "title": "Victoria del Sénior en un final de infarto",
+    "date": "2026-09-10",
+    "category": "Crónica",
+    "image": "Images/1NM.jpg",
+    "file": "news/senior-victoria.md",
+    "excerpt": "El primer equipo logró una importante victoria como local tras un final lleno de emoción. Te contamos las claves del partido."
+  },
+  {
+    "id": "captacion-jornadas",
+    "title": "Convocatoria a jornadas de captación",
+    "date": "2026-09-01",
+    "category": "Club",
+    "image": "Images/entrenadores.jpg",
+    "file": "news/captacion.md",
+    "excerpt": "Abrimos inscripciones para nuevas y nuevos jugadores en categorías base. Conoce fechas, horarios y cómo apuntarte."
+  },
+  {
+    "id": "playa-balance",
+    "title": "Balance del torneo de Balonmano Playa",
+    "date": "2026-08-20",
+    "category": "Playas",
+    "image": "Images/Playa.jpg",
+    "file": "news/playa-balance.md",
+    "excerpt": "Gran actuación de nuestras categorías en el circuito veraniego con medallas y mucha experiencia para el futuro."
+  },
+  {
+    "id": "juvenil-femenino-arranque",
+    "title": "Juvenil Femenino: arranque prometedor",
+    "date": "2026-09-05",
+    "category": "Cantera",
+    "image": "Images/juvenilFemenino.jpeg",
+    "file": "news/juvenil-femenino.md",
+    "excerpt": "Las juveniles comienzan la temporada con buenas sensaciones y un estilo de juego sólido."
+  }
+]

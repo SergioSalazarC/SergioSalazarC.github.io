@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias - Club Balonmano Pinto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <img src="Images/Pinto.png" alt="Balonmano Pinto Logo" class="logo-img">
+            <div class="logo-text">
+                <span class="club-name">Club Balonmano</span> <span class="pinto">Pinto</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="index.html#about">El Club</a>
+            <a href="equipos.html">Equipos</a>
+            <a href="noticias.html">Noticias</a>
+            <a href="resultados.html">Resultados</a>
+            <a href="index.html#contact" class="btn-join">Únete</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="news-hero" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('Images/bg.jpg'); background-size: cover; background-position: center; color: #fff; display:flex; align-items:center; min-height: 55vh;">
+        <div style="padding: 4rem 5%; max-width: 1100px;">
+            <h1 style="font-size: 3rem; letter-spacing: 1px;">Noticias del Club</h1>
+            <p style="opacity: .9; margin-top: .5rem; max-width: 780px;">Actualidad, crónicas y anuncios oficiales del Club Balonmano Pinto. Mantente al día con toda la información.</p>
+        </div>
+    </section>
+
+    <!-- LISTADO DE NOTICIAS (DINÁMICO) -->
+    <section class="section-padding" style="padding: 3rem 5% 4rem;">
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">Últimas publicaciones</h2>
+
+        <div id="newsGrid" class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            <!-- Las noticias se cargarán aquí dinámicamente -->
+        </div>
+
+        <div id="emptyState" style="display:none; text-align:center; color:#555; margin-top: 1rem;">Aún no hay noticias publicadas.</div>
+    </section>
+
+    <!-- Modal para leer noticia completa -->
+    <div id="newsModal" aria-hidden="true" style="position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.6); z-index: 2000;">
+        <div role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="background:#fff; width:min(900px, 92%); max-height: 90vh; overflow:auto; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,.25);">
+            <div id="modalHero" style="height: 220px; background-size: cover; background-position:center; border-top-left-radius:12px; border-top-right-radius:12px;"></div>
+            <div style="padding: 1.2rem 1.2rem 2.2rem; position:relative;">
+                <button id="modalClose" aria-label="Cerrar" class="btn-join" style="position:absolute; top:-18px; right:12px; padding:.45rem .8rem; border-radius:20px;">✕</button>
+                <div style="display:flex; gap:.5rem; align-items:center; margin-bottom:.6rem;">
+                    <span id="modalCategory" class="category-tag" style="font-size:.75rem; padding:.25rem .5rem; border-radius: 4px; background:#111; color:#fff;">Categoría</span>
+                    <span id="modalDate" style="color:#666; font-size:.9rem;">Fecha</span>
+                </div>
+                <h2 id="modalTitle" style="margin-bottom: .8rem; line-height:1.25;"></h2>
+                <article id="modalContent" class="news-content" style="color:#222;">
+                    <!-- Contenido MD renderizado aquí -->
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Configuración ligera de marked
+        if (window.marked) {
+            marked.setOptions({
+                breaks: true,
+                gfm: true
+            });
+        }
+
+        const grid = document.getElementById('newsGrid');
+        const emptyState = document.getElementById('emptyState');
+        const modal = document.getElementById('newsModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalHero = document.getElementById('modalHero');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalDate = document.getElementById('modalDate');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+
+        const CATEGORY_STYLES = {
+            'Crónica': { bg: '#E31B23', color:'#fff' },
+            'Club': { bg: '#111', color:'#fff' },
+            'Playas': { bg: '#FFE135', color:'#111' },
+            'Cantera': { bg: '#E31B23', color:'#fff' }
+        };
+
+        function formatDateES(iso) {
+            try {
+                const d = new Date(iso);
+                const f = new Intl.DateTimeFormat('es-ES', { day:'2-digit', month:'short', year:'numeric' });
+                // Capitalizar mes
+                const s = f.format(d).replace('.', '');
+                return s;
+            } catch (e) { return iso; }
+        }
+
+        function createCard(item) {
+            const s = CATEGORY_STYLES[item.category] || { bg:'#111', color:'#fff' };
+            const card = document.createElement('article');
+            card.className = 'card';
+            card.style.cssText = 'display:flex; flex-direction: column; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 10px 20px rgba(0,0,0,0.08);';
+
+            const img = document.createElement('div');
+            img.className = 'card-image';
+            img.style.cssText = `height:180px; background-size:cover; background-position:center; background-image:url('${item.image}')`;
+
+            const content = document.createElement('div');
+            content.className = 'card-content';
+            content.style.cssText = 'padding:1rem 1.1rem 1.2rem;';
+
+            const cat = document.createElement('span');
+            cat.className = 'category-tag';
+            cat.textContent = item.category;
+            cat.style.cssText = `background:${s.bg}; color:${s.color}; font-size:.75rem; padding:.25rem .5rem; border-radius:4px;`;
+
+            const h3 = document.createElement('h3');
+            h3.style.marginTop = '.6rem';
+            h3.textContent = item.title;
+
+            const p = document.createElement('p');
+            p.style.cssText = 'margin:.4rem 0 .8rem; color:#333;';
+            p.textContent = item.excerpt || '';
+
+            const footer = document.createElement('div');
+            footer.style.cssText = 'display:flex; justify-content: space-between; align-items:center; font-size:.9rem; color:#666;';
+
+            const date = document.createElement('span');
+            date.textContent = 'Publicado: ' + formatDateES(item.date);
+
+            const btn = document.createElement('a');
+            btn.href = '#';
+            btn.className = 'cta-button';
+            btn.style.cssText = 'padding:.4rem .8rem; font-size:.85rem;';
+            btn.textContent = 'Leer más';
+            btn.addEventListener('click', (ev) => {
+                ev.preventDefault();
+                openModal(item);
+            });
+
+            footer.appendChild(date);
+            footer.appendChild(btn);
+
+            content.appendChild(cat);
+            content.appendChild(h3);
+            content.appendChild(p);
+            content.appendChild(footer);
+
+            card.appendChild(img);
+            card.appendChild(content);
+            return card;
+        }
+
+        async function openModal(item) {
+            modalHero.style.backgroundImage = `url('${item.image}')`;
+            modalTitle.textContent = item.title;
+            modalCategory.textContent = item.category;
+            const s = CATEGORY_STYLES[item.category] || { bg:'#111', color:'#fff' };
+            modalCategory.style.background = s.bg;
+            modalCategory.style.color = s.color;
+            modalDate.textContent = formatDateES(item.date);
+            modalContent.innerHTML = '<p style="color:#666;">Cargando contenido…</p>';
+
+            try {
+                const resp = await fetch(item.file + '?v=' + Date.now());
+                if (!resp.ok) throw new Error('No se pudo cargar el artículo');
+                const md = await resp.text();
+                const html = window.marked ? marked.parse(md) : md.replace(/\n/g,'<br>');
+                modalContent.innerHTML = html;
+            } catch (e) {
+                modalContent.innerHTML = '<p style="color:#b00;">Error al cargar el contenido.</p>';
+            }
+
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            // Focus management básico
+            modalClose.focus();
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        modalClose.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        async function loadNews() {
+            const loading = document.createElement('p');
+            loading.textContent = 'Cargando noticias…';
+            loading.style.cssText = 'color:#666;';
+            grid.parentElement.insertBefore(loading, grid.nextSibling);
+            try {
+                const resp = await fetch('news/index.json?v=' + Date.now());
+                if (!resp.ok) throw new Error('No se pudo cargar la lista de noticias');
+                const items = await resp.json();
+                // Ordenar por fecha descendente
+                items.sort((a,b) => new Date(b.date) - new Date(a.date));
+                grid.innerHTML = '';
+                if (!items.length) {
+                    emptyState.style.display = 'block';
+                } else {
+                    emptyState.style.display = 'none';
+                    for (const it of items) {
+                        grid.appendChild(createCard(it));
+                    }
+                }
+            } catch (e) {
+                grid.innerHTML = '<p style="color:#b00;">No se pudieron cargar las noticias.</p>';
+            } finally {
+                loading.remove();
+            }
+        }
+
+        loadNews();
+    </script>
+
+    <footer>
+        <p>&copy; 2024 Club Balonmano Pinto. Todos los derechos reservados. <br> <span>#ContigoSomosMásGrandes</span>.</p>
+    </footer>
+
+</body>
+</html>
