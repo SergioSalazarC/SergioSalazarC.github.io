@@ -7,6 +7,5 @@ Un verano inolvidable para nuestras categorías, que compitieron y disfrutaron e
 - Plata en infantil femenino
 - Mención especial al fair play
 
-![Balonmano Playa](Images/Playa.jpg)
 
 Las jugadoras y jugadores demostraron técnica, compañerismo y muchas ganas. ¡Seguimos creciendo!

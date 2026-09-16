@@ -11,7 +11,6 @@ El resultado final fue 29-28. Nuestro guardameta detuvo el último lanzamiento y
 
 > “El equipo creyó hasta el final”, destacó el entrenador en rueda de prensa.
 
-![Celebración](Images/1NM.jpg)
 
 ### Próximo compromiso
 El próximo sábado visitamos la cancha de un rival directo. ¡Os esperamos animando desde la grada!

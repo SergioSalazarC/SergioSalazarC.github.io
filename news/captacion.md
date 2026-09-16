@@ -13,4 +13,3 @@ Envía un correo a **balonmanopinto1@gmail.com** con tu nombre, edad y teléfono
 
 > ¡Te esperamos para disfrutar del balonmano en familia!
 
-![Entrenadores](Images/entrenadores.jpg)
