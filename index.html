@@ -20,7 +20,6 @@
             <a href="#about">El Club</a>
             <a href="equipos.html">Equipos</a>
             <a href="noticias.html">Noticias</a>
-            <a href="resultados.html">Resultados</a>
             <a href="#contact" class="btn-join">Únete</a>
         </div>
     </nav>
@@ -30,6 +29,22 @@
         <h2>#ContigoSomosMásGrandes</h2>
         <p class="hero-description">El corazón del balonmano en Pinto. Formando jugadores y compitiendo con orgullo desde la base hasta la élite.</p>
         <a href="#contact" class="cta-button">Ven a Entrenar</a>
+    </section>
+
+    <!-- ÚLTIMAS NOTICIAS (DINÁMICO) -->
+    <section id="latest-news" class="section-padding news" style="background-color: #f8f9fa;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 class="section-title">Últimas Noticias</h2>
+            <p style="color: #666; max-width: 650px; margin: 0 auto;">Mantente al día con la actualidad y novedades del Club Balonmano Pinto.</p>
+        </div>
+
+        <div id="recentNewsGrid" class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1000px; margin: 0 auto;">
+            <!-- Las 2 noticias más recientes se cargarán aquí dinámicamente -->
+        </div>
+
+        <div style="text-align: center; margin-top: 2.5rem;">
+            <a href="noticias.html" class="cta-button" style="display: inline-block;">Ver todas las noticias</a>
+        </div>
     </section>
 
     <section id="about" class="section-padding about">
@@ -43,16 +58,16 @@
 
     <section id="teams" class="section-padding teams">
         <div class="teams-header">
-            <h2 class="section-title">Nuestras Categorías</h2>
+            <h2 class="section-title">Nuestros equipos</h2>
         </div>
         
         <div class="grid-container">
             <div class="card">
-                <div class="card-image" style="background-image: url(Images/1NM.jpg);"></div>
+                <div class="card-image" style="background-image: url('Images/NM.jpg');"></div>
                 <div class="card-content">
                     <span class="category-tag">Competición</span>
-                    <h3>Equipos Sénior</h3>
-                    <p>Nuestros primeros equipos compiten al máximo nivel regional y nacional. Representando a Pinto en las competiciones Territoriales y Nacionales.</p>
+                    <h3>Primera Nacional</h3>
+                    <p>Nuestro primer equipo compite al máximo nivel del balonmano madrileño. Representando a Pinto por toda España.</p>
                 </div>
             </div>
 
@@ -61,16 +76,16 @@
                 <div class="card-content">
                     <span class="category-tag">Formación</span>
                     <h3>Base</h3>
-                    <p>Desde benjamines hasta juveniles. Desarrollamos el talento joven con entrenadores cualificados.</p>
+                    <p>Desde benjamines hasta seniors. Desarrollamos el talento joven con entrenadores cualificados.</p>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-image" style="background-image: url('Images/Playa.jpg');"></div>
+                <div class="card-image" style="background-image: url('Images/Playa.jpeg');"></div>
                 <div class="card-content">
                     <span class="category-tag">Iniciación</span>
                     <h3>Balonmano Playa</h3>
-                    <p>La versión más espectacular del balonmano. Técnica, diversión y competición en la arena durante los meses de verano.</p>
+                    <p>La versión más espectacular del balonmano. Campeones de España en la modalidad del Balonmano más frenética.</p>
                 </div>
             </div>
         </div>
@@ -96,5 +111,175 @@
         <p>&copy; 2024 Club Balonmano Pinto. Todos los derechos reservados. <br> <span>#ContigoSomosMásGrandes</span>.</p>
     </footer>
 
+    <!-- Modal para leer noticia completa -->
+    <div id="newsModal" aria-hidden="true" style="position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.6); z-index: 2000;">
+        <div role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="background:#fff; width:min(900px, 92%); max-height: 90vh; overflow:auto; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,.25);">
+            <div id="modalHero" style="height: 220px; background-size: cover; background-position:center; border-top-left-radius:12px; border-top-right-radius:12px;"></div>
+            <div style="padding: 1.2rem 1.2rem 2.2rem; position:relative;">
+                <button id="modalClose" aria-label="Cerrar" class="btn-join" style="position:absolute; top:-18px; right:12px; padding:.45rem .8rem; border-radius:20px; cursor:pointer; border:none;">✕</button>
+                <div style="display:flex; gap:.5rem; align-items:center; margin-bottom:.6rem;">
+                    <span id="modalCategory" class="category-tag" style="font-size:.75rem; padding:.25rem .5rem; border-radius: 4px; background:#111; color:#fff;">Categoría</span>
+                    <span id="modalDate" style="color:#666; font-size:.9rem;">Fecha</span>
+                </div>
+                <h2 id="modalTitle" style="margin-bottom: .8rem; line-height:1.25;"></h2>
+                <article id="modalContent" class="news-content" style="color:#222;">
+                    <!-- Contenido MD renderizado aquí -->
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        if (window.marked) {
+            marked.setOptions({
+                breaks: true,
+                gfm: true
+            });
+        }
+
+        const newsGrid = document.getElementById('recentNewsGrid');
+        const modal = document.getElementById('newsModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalHero = document.getElementById('modalHero');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalDate = document.getElementById('modalDate');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+
+        const CATEGORY_STYLES = {
+            'Crónica': { bg: '#E31B23', color:'#fff' },
+            'Club': { bg: '#111', color:'#fff' },
+            'Playas': { bg: '#FFE135', color:'#111' },
+            'Cantera': { bg: '#E31B23', color:'#fff' }
+        };
+
+        function formatDateES(iso) {
+            try {
+                const d = new Date(iso);
+                const f = new Intl.DateTimeFormat('es-ES', { day:'2-digit', month:'short', year:'numeric' });
+                return f.format(d).replace('.', '');
+            } catch (e) { return iso; }
+        }
+
+        function createCard(item) {
+            const s = CATEGORY_STYLES[item.category] || { bg:'#111', color:'#fff' };
+            const card = document.createElement('article');
+            card.className = 'card';
+            card.style.cssText = 'display:flex; flex-direction: column; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 10px 20px rgba(0,0,0,0.08);';
+
+            const img = document.createElement('div');
+            img.className = 'card-image';
+            img.style.cssText = `height:200px; background-size:cover; background-position:center; background-image:url('${item.image}')`;
+
+            const content = document.createElement('div');
+            content.className = 'card-content';
+            content.style.cssText = 'padding:1.2rem; display:flex; flex-direction:column; flex:1;';
+
+            const cat = document.createElement('span');
+            cat.className = 'category-tag';
+            cat.textContent = item.category;
+            cat.style.cssText = `background:${s.bg}; color:${s.color}; font-size:.75rem; padding:.25rem .5rem; border-radius:4px; align-self:flex-start;`;
+
+            const h3 = document.createElement('h3');
+            h3.style.marginTop = '.6rem';
+            h3.style.fontSize = '1.25rem';
+            h3.textContent = item.title;
+
+            const p = document.createElement('p');
+            p.style.cssText = 'margin:.4rem 0 1rem; color:#444; font-size:.95rem; flex:1;';
+            p.textContent = item.excerpt || '';
+
+            const footer = document.createElement('div');
+            footer.style.cssText = 'display:flex; justify-content: space-between; align-items:center; font-size:.85rem; color:#666; margin-top:auto; padding-top:0.5rem;';
+
+            const date = document.createElement('span');
+            date.textContent = 'Publicado: ' + formatDateES(item.date);
+
+            const btn = document.createElement('a');
+            btn.href = '#';
+            btn.className = 'cta-button';
+            btn.style.cssText = 'padding:.4rem .8rem; font-size:.85rem; cursor:pointer;';
+            btn.textContent = 'Leer';
+            btn.addEventListener('click', (ev) => {
+                ev.preventDefault();
+                openModal(item);
+            });
+
+            footer.appendChild(date);
+            footer.appendChild(btn);
+
+            content.appendChild(cat);
+            content.appendChild(h3);
+            content.appendChild(p);
+            content.appendChild(footer);
+
+            card.appendChild(img);
+            card.appendChild(content);
+            return card;
+        }
+
+        async function openModal(item) {
+            modalHero.style.backgroundImage = `url('${item.image}')`;
+            modalTitle.textContent = item.title;
+            modalCategory.textContent = item.category;
+            const s = CATEGORY_STYLES[item.category] || { bg:'#111', color:'#fff' };
+            modalCategory.style.background = s.bg;
+            modalCategory.style.color = s.color;
+            modalDate.textContent = formatDateES(item.date);
+            modalContent.innerHTML = '<p style="color:#666;">Cargando contenido…</p>';
+
+            try {
+                const resp = await fetch(item.file + '?v=' + Date.now());
+                if (!resp.ok) throw new Error('No se pudo cargar el artículo');
+                const md = await resp.text();
+                const html = window.marked ? marked.parse(md) : md.replace(/\\n/g,'<br>');
+                modalContent.innerHTML = html;
+            } catch (e) {
+                modalContent.innerHTML = '<p style="color:#b00;">Error al cargar el contenido.</p>';
+            }
+
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            modalClose.focus();
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        modalClose.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        async function loadRecentNews() {
+            try {
+                const resp = await fetch('news/index.json?v=' + Date.now());
+                if (!resp.ok) throw new Error('No se pudo cargar la lista de noticias');
+                const items = await resp.json();
+                items.sort((a,b) => new Date(b.date) - new Date(a.date));
+                const recentItems = items.slice(0, 2);
+                newsGrid.innerHTML = '';
+                if (!recentItems.length) {
+                    newsGrid.innerHTML = '<p style="text-align:center; color:#666; grid-column: 1/-1;">No hay noticias recientes disponibles.</p>';
+                } else {
+                    for (const it of recentItems) {
+                        newsGrid.appendChild(createCard(it));
+                    }
+                }
+            } catch (e) {
+                newsGrid.innerHTML = '<p style="text-align:center; color:#b00; grid-column: 1/-1;">No se pudieron cargar las noticias.</p>';
+            }
+        }
+
+        loadRecentNews();
+    </script>
 </body>
 </html>
