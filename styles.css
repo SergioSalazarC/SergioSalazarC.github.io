@@ -50,6 +50,9 @@ nav {
 
 .logo-img {
     height: 50px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
     margin-right: 15px;
 }
 
@@ -219,9 +222,9 @@ nav {
 
 .card-image {
     height: 220px;
-    background-color: #333;
+    background-color: #222;
     background-size: cover;
-    background-position: center top;
+    background-position: center center;
 }
 
 .card-content {
@@ -341,7 +344,7 @@ footer span {
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 420px 1fr;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -354,17 +357,24 @@ footer span {
 .team-image-section {
     position: relative;
     overflow: hidden;
+    background-color: #111111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
 }
 
 .team-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s;
+    object-position: center center;
+    display: block;
+    transition: transform 0.5s ease;
 }
 
 .team-interactive-card:hover .team-photo {
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 .team-overlay {
@@ -373,10 +383,11 @@ footer span {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+    background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.65) 100%);
     display: flex;
     align-items: flex-end;
-    padding: 2rem;
+    padding: 1.5rem;
+    pointer-events: none;
 }
 
 .category-badge {
@@ -951,7 +962,10 @@ footer span {
     }
 
     .team-image-section {
-        height: 250px;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        width: 100%;
+        max-height: 380px;
     }
 
     .team-title-bar h2 {
